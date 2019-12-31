@@ -5,6 +5,7 @@ variable "root_block_device" {
     delete_on_termination = "true"
   }]
 }
-variable "access_key" {}
-variable "secret_key" {}
 
+variable "access_key" {}
+
+variable "secret_key" {}
