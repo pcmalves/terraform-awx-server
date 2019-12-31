@@ -8,4 +8,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: 'Terraform Validate'
-      run: terraform validate -var 'secret_key=${{ secrets.secret_key}}' -var 'access_key=${{ secrets.access_key }}
+      run: terraform validate -var 'secret_key=${{ secrets.secret_key}}' -var 'access_key=${{ secrets.access_key }}'
