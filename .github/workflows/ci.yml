@@ -13,7 +13,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.access_key }}
           aws-secret-access-key: ${{ secrets.secret_key }}
-          awx-region: us-east-1
+          aws-region: us-east-1
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
