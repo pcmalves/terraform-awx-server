@@ -8,12 +8,6 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: actions/checkout@master
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.access_key }}
-          aws-secret-access-key: ${{ secrets.secret_key }}
-          aws-region: us-east-1
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -26,6 +20,9 @@ jobs:
           tf_actions_version: 0.11.8
           tf_actions_subcommand: 'validate'
           tf_actions_working_dir: '.'
+        env:
+          access_key: '${{ secrets.access_key }}'
+          secret_key: '${{ secrets.secret_key }}'
       - name: 'Terraform Plan'
         id: 'terraform_plan'
         uses: hashicorp/terraform-github-actions@master
@@ -33,3 +30,6 @@ jobs:
           tf_actions_version: 0.11.8
           tf_actions_subcommand: 'plan'
           tf_actions_working_dir: '.'
+        env:
+          access_key: '${{ secrets.access_key }}'
+          secret_key: '${{ secrets.secret_key }}'
