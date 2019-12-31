@@ -17,4 +17,4 @@ Para testar localmente, é necessário fazer o clone do repositório. Dentro do 
 $ rm -rf .terraform/ && terraform fmt && terraform init && terraform validate && terraform plan
 ```
 
-OBS: Neste projeto estou utilizando a versão 0.11.8 do Terraform. Em breve farei uma atualização.
+OBS: Neste projeto estou utilizando a versão 0.11.8 do Terraform. Em breve farei uma atualização para versão 0.12.
