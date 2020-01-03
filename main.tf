@@ -87,7 +87,7 @@ resource "aws_route_table_association" "vpc-association" {
 
 resource "aws_key_pair" "access-key-instance" {
   key_name   = "awx-access-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8v2gGEcmVnWUTCX+akw34RYJFglXnLIAsA2txIZ95sd0mHkbnw04sQo/Hu2f5Yl5uXBpjLued7jVzouzkN1Jf52tAk8qJMXLSRLdhUVEoPU4dTuP6r1WlKwiij7tWSoI8V+G3QdRYLRua7cpmzik3lw4qtP+COw7fO3pT9kI68JmeVLs+mAhoZ1F+4+O1RfgsnpIczhEH2u01jRAkQ/z5v5/7upIt0a0ZSao1t8uBUH7dHrSZKbrklWONlAdR3HdzH/Y2sw1ZEOAgQ8uSoDPgiHMWYue2yyjKNn2JX07Ac0JES7LhC4QHt+28i7KIky/0EQuB4KVrleVboikhr1jj paulo@qbnotebook"
+  public_key = "enter_public_key_here"
 }
 
 resource "aws_instance" "awx-server" {
