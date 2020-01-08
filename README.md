@@ -18,3 +18,5 @@ $ rm -rf .terraform/ && terraform fmt && terraform init && terraform validate &&
 ```
 
 OBS: Neste projeto estou utilizando a versão 0.11.8 do Terraform. Em breve farei uma atualização para versão 0.12.
+
+Qualquer dúvida me contate no [Linkedin](https://www.linkedin.com/in/pcmalves/)
