@@ -11,9 +11,45 @@ variable "root_block_device" {
 }
 
 variable "instance_type" {
-  default = "t2.medium"
+  default = "t3.medium"
+}
+
+variable "name_instance" {
+  default = "awx-server"
+}
+
+variable "vpc_cidr_block" {
+  default = "10.0.0.0/16"
+}
+
+variable "enable_dns_support" {
+  default = true
+}
+
+variable "enable_dns_hostnames" {
+  default = true
 }
 
 variable "name" {
   default = "awx-server"
+}
+
+variable "subnet_cidr" {
+  default = "10.0.1.0/24"
+}
+
+variable "map_public_ip_on_launch" {
+  default = true
+}
+
+variable "availability_zone" {
+  default = "us-east-1b"
+}
+
+variable "destination_cidr_block" {
+  default = "0.0.0.0/0"
+}
+
+variable "key_name" {
+  default = "public_key"
 }
