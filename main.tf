@@ -2,69 +2,28 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_vpc" "vpc-awx-server" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_support   = true
-  enable_dns_hostnames = true
-
-  tags = {
-    Name = "vpc-1"
-  }
-}
-
-resource "aws_subnet" "sb-awx-server" {
-  vpc_id                  = "${aws_vpc.vpc-awx-server.id}"
-  cidr_block              = "10.0.1.0/24"
-  map_public_ip_on_launch = true
-  availability_zone       = "us-east-1b"
-
-  tags = {
-    Name = "sb-${var.name}"
-  }
-}
-
-resource "aws_internet_gateway" "igw-vpc-1" {
-  vpc_id = "${aws_vpc.vpc-awx-server.id}"
-
-  tags = {
-    Name = "igw-vpc-1"
-  }
-}
-
-resource "aws_route_table" "rtb-vpc-1" {
-  vpc_id = "${aws_vpc.vpc-awx-server.id}"
-
-  tags = {
-    Name = "rtb-vpc-1"
-  }
-}
-
-resource "aws_route" "internet-access-vpc-1" {
-  route_table_id         = "${aws_route_table.rtb-vpc-1.id}"
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = "${aws_internet_gateway.igw-vpc-1.id}"
-}
-
-resource "aws_route_table_association" "vpc-association" {
-  subnet_id      = "${aws_subnet.sb-awx-server.id}"
-  route_table_id = "${aws_route_table.rtb-vpc-1.id}"
-}
-
-resource "aws_key_pair" "public_key" {
-  key_name   = "public_key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3F6tyPEFEzV0LX3X8BsXdMsQz1x2cEikKDEY0aIj41qgxMCP/iteneqXSIFZBp5vizPvaoIR3Um9xK7PGoW8giupGn+EPuxIA4cDM4vzOqOkiMPhz5XK0whEjkVzTo4+S0puvDZuwIsdiW9mxhJc7tgBNL0cYlWSYVkz4G/fslNfRPW5mYAM49f4fhtxPb5ok4Q2Lg9dPKVHO/Bgeu5woMc7RY0p1ej6D4CKFE6lymSDJpW0YHX/wqE9+cfEauh7xZcG0q9t2ta6F6fmX0agvpFyZo8aFbXeUBr7osSCJNgvavWbM/06niWrOvYX2xwWdhXmXSrbX8ZbabVohBK41 email@example.com"
+module "vpc-main" {
+  source                  = "git::https://github.com/pcmalves/tf-module-network.git"
+  availability_zone       = "${var.availability_zone}"
+  destination_cidr_block  = "${var.destination_cidr_block}"
+  enable_dns_hostnames    = "${var.enable_dns_hostnames}"
+  enable_dns_support      = "${var.enable_dns_support}"
+  map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
+  subnet_cidr_block       = "${var.subnet_cidr}"
+  vpc_cidr_block          = "${var.vpc_cidr_block}"
+  tag_name                = "${var.name}"
 }
 
 module "instance" {
   source                 = "git::https://github.com/pcmalves/tf-module-instance.git"
   ami                    = "${var.ami}"
   instance_type          = "${var.instance_type}"
-  subnet_id              = "${aws_subnet.sb-awx-server.id}"
-  vpc_security_group_ids = "${aws_security_group.sg_awx_server.id}"
-  user_data              = "${data.template_file.awx-server-userdata.rendered}"
+  key_name               = "${var.key_name}"
+  name                   = "${var.name_instance}"
   root_block_device      = "${var.root_block_device}"
-  key_name               = "${aws_key_pair.public_key.key_name}"
-  name                   = "${var.name}"
+  subnet_id              = "${module.vpc-main.subnet_id}"
+  user_data              = "${data.template_file.awx-server-userdata.rendered}"
+  vpc_security_group_ids = "${aws_security_group.sg_awx_server.id}"
 }
 
 data "template_file" "awx-server-userdata" {
@@ -80,7 +39,7 @@ data "http" "my-ip-address" {
 }
 
 resource "aws_security_group" "sg_awx_server" {
-  vpc_id = "${aws_vpc.vpc-awx-server.id}"
+  vpc_id = "${module.vpc-main.vpc_id}"
 
   ingress {
     description = "ssh access to my ip"
