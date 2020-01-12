@@ -1,5 +1,16 @@
-# Servidor AWX com Terraform
+# Como realizar instalação e configuração do servidor AWX com Terraform no Ubuntu-18.04
 
+Objetivo
+--------
+- Criar infraestrutura do servidor AWX utilizando Terraform
+- Instalação do servidor AWX com shellscripts
+
+Pré-requisito
+-------------
+- Instalação Terraform [versão 0.11.8](https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip)
+- Instalação e configuração do aws-cli 
+
+<!-- 
 No processo de instalação do AWX o clone está sendo direto do Github [AWX Project](https://github.com/ansible/awx).  
 
 Aqui estou apenas fazendo o processo de instalação automatizado. Adicionarei melhorias posteriormente.
@@ -23,6 +34,6 @@ $ rm -rf .terraform/ && terraform fmt && terraform init && terraform validate &&
 
 O **plan** dará um overview dos recursos que serão criados. Depois é só executar **terraform apply** para criar os recursos.
 
-OBS: Neste projeto estou utilizando a versão 0.11.8 do Terraform. Em breve farei uma atualização para versão 0.12. Outro detalhe, é necessário a instalaçao e configuração do aws-cli
+OBS: Neste projeto estou utilizando a versão 0.11.8 do Terraform. Em breve farei uma atualização para versão 0.12. Outro detalhe, é necessário a instalaçao e configuração do aws-cli -->
 
 [Linkedin](https://www.linkedin.com/in/pcmalves/)
