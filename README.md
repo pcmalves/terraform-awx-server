@@ -7,9 +7,46 @@ Objetivo
 
 Pré-requisito
 -------------
-- Instalação Terraform [versão 0.11.8](https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip)
+- Instalação Terraform versão 0.11.8
 - Instalação e configuração do aws-cli 
 
+Passo 1 - Instalação do Terraform no Ubuntu-18.04
+-------------------------------------------------
+
+Instale pacote unzip
+
+```bash
+$ sudo apt-get install unzip
+```
+Download do pacote do Terraform
+
+```bash
+wget https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip
+```
+Extraindo arquivo do download
+
+```bash
+unzip terraform_0.12.18_linux_amd64.zip
+```
+
+Movendo o executável para ficar disponível global
+
+```bash
+sudo mv terraform /usr/local/bin/
+```
+Testando instalação
+
+```bash
+terraform --version
+```
+Output do comando
+
+```html
+Terraform v0.11.8
+
+Your version of Terraform is out of date! The latest version
+is 0.12.19. You can update by downloading from www.terraform.io/downloads.html
+```
 <!-- 
 No processo de instalação do AWX o clone está sendo direto do Github [AWX Project](https://github.com/ansible/awx).  
 
