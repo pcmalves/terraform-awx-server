@@ -139,9 +139,13 @@ $ terraform apply -auto-approve
 ```
 Conclusão
 ---
-Com essa documentação rápida, instalamos **Terraform**, instalamos **AWS-CLI**
+Com essa documentação rápida, instalamos **Terraform** e **AWS-CLI**
 
-Fizemos um primeiro teste com comandos do **Terraform**
+Rodamos primeir teste utilizando os comando do **Terraform**
 
+Referência
+---
+https://github.com/ansible/awx
 
-[Linkedin](https://www.linkedin.com/in/pcmalves/)
+Meu contato no [Linkedin](https://www.linkedin.com/in/pcmalves/)
+---
