@@ -102,32 +102,46 @@ AWS Secret Key [None]: e8hyV1Z0P9GdMXkIIXe/kFdN5oEXAMPLE
 Default region name [None]: us-west-2
 Default output format [None]: json
 ```
+Passo 3 - Clonando e testando o projeto localmente
+---
 
-
-<!-- 
-No processo de instalação do AWX o clone está sendo direto do Github [AWX Project](https://github.com/ansible/awx).  
-
-Aqui estou apenas fazendo o processo de instalação automatizado. Adicionarei melhorias posteriormente.
-
-Subi um instância **t3.medium** que vai de encontro com a documentação do **AWX Project**.
-
-Este repositório auxilia na seguintes tarefas:
-
-- Criação da infra em um ambiente cloud AWS
-- Efetua processo de instalação automatizado do servidor
-
-O processo todo deve dar em torno de 10 á 15 minutos para conclusão. Após a conclusão da construção da infra, ainda há parametrização do ambiente que irá hospedar o servidor **AWX**
-
-Os arquivos de logs da instalação fica dentro da instância em **/var/log/cloud-init-output.log**. 
-
-Para subir o ambiente, é necessário fazer o clone do repositório. Dentro do diretório **terraform-awx-server** execute os seguintes comandos:
+Clonando o projeto
 
 ```bash
-$ rm -rf .terraform/ && terraform fmt && terraform init && terraform validate && terraform plan
+$ git clone https://github.com/pcmalves/terraform-awx-server.git
 ```
+Entrando na pasta do projeto
 
-O **plan** dará um overview dos recursos que serão criados. Depois é só executar **terraform apply** para criar os recursos.
+```bash
+$ cd terraform-awx-server/ 
+```
+Testando criação dos recursos
 
-OBS: Neste projeto estou utilizando a versão 0.11.8 do Terraform. Em breve farei uma atualização para versão 0.12. Outro detalhe, é necessário a instalaçao e configuração do aws-cli -->
+```bash
+$ terraform init && terraform validate && terraform plan
+```
+Output
+
+```html
+
+Plan: 8 to add, 0 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
+```
+Tudo ok na criação dos recursos basta dar um **apply**
+
+```bash
+$ terraform apply -auto-approve
+```
+Conclusão
+---
+Com essa documentação rápida, instalamos **Terraform**, instalamos **AWS-CLI**
+
+Fizemos um primeiro teste com comandos do **Terraform**
+
 
 [Linkedin](https://www.linkedin.com/in/pcmalves/)
