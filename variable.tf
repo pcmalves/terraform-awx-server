@@ -53,3 +53,19 @@ variable "destination_cidr_block" {
 variable "key_name" {
   default = "public_key"
 }
+
+variable "private_ip" {
+  default = ""
+}
+
+variable "source_dest_check" {
+  default = ""
+}
+
+variable "associate_public_ip_address" {
+  default = true
+}
+
+variable "iam_instance_profile" {
+  default = ""
+}

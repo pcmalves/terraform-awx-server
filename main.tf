@@ -15,15 +15,18 @@ module "vpc-main" {
 }
 
 module "instance" {
-  source                 = "git::https://github.com/pcmalves/tf-module-instance.git"
-  ami                    = "${var.ami}"
-  instance_type          = "${var.instance_type}"
-  key_name               = "${var.key_name}"
-  name                   = "${var.name_instance}"
-  root_block_device      = "${var.root_block_device}"
-  subnet_id              = "${module.vpc-main.subnet_id}"
-  user_data              = "${data.template_file.awx-server-userdata.rendered}"
-  vpc_security_group_ids = "${aws_security_group.sg_awx_server.id}"
+  source                      = "./modules/instance"
+  ami                         = "${var.ami}"
+  associate_public_ip_address = "${var.associate_public_ip_address}"
+  iam_instance_profile        = "${var.iam_instance_profile}"
+  instance_type               = "${var.instance_type}"
+  key_name                    = "${var.key_name}"
+  private_ip                  = "${var.private_ip}"
+  root_block_device           = "${var.root_block_device}"
+  source_dest_check           = "${var.source_dest_check}"
+  subnet_id                   = "${module.vpc-main.subnet_id}"
+  user_data                   = "${data.template_file.awx-server-userdata.rendered}"
+  vpc_security_group_ids      = "${aws_security_group.sg_awx_server.id}"
 }
 
 data "template_file" "awx-server-userdata" {
